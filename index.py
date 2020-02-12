@@ -94,7 +94,9 @@ def get_generated_text():
 
     generated_sequence = output_sequences[0].tolist()
     text = tokenizer.decode(generated_sequence, clean_up_tokenization_spaces=True)
-    text = text[: text.find(user_config.get("stop_token", model_config["stop_token"]))]
+    text = text[
+        : text.rindex(user_config.get("stop_token", model_config["stop_token"]))
+    ]
 
     return jsonify({"text": text})
 
